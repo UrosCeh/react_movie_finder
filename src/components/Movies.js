@@ -6,8 +6,8 @@ const Movies = ({ movies }) => {
         display: "flex",
         width: "80vw",
         // justifyContent: "center",
+        // minHeight: "300vh",
         margin: "0 auto",
-        height: "100vh",
         flexFlow: "row wrap"
     }
 

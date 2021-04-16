@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Button from "./components/Button"
 import Movies from './components/Movies';
-// import SearchComponent from './components/SearchComponent';
+import SearchComponent from './components/SearchComponent';
 
 function App() {
 
@@ -42,7 +42,7 @@ function App() {
 
     // console.log(data)
 
-    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=kengu`)
+    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=lock`)
     const data = await res.json()
 
     console.log( data.results, data.total_results)
@@ -69,8 +69,8 @@ function App() {
       <Button text={'search'} onClick={() => setShowSearch(!showSearch)} />
       <Button text={'clg'} onClick={displayMovies} />
       <Button text={'fetch'} onClick={fetchMovie} />
+      { showSearch && <SearchComponent /> }
       { movies.length > 0 ? <Movies movies={movies} /> : "No movies" }
-      {/* { showSearch && <SearchComponent /> } */}
     </div>
   );
 }
