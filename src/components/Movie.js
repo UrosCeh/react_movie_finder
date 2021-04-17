@@ -23,8 +23,8 @@ const Movie = ({ movie }) => {
         <div className={"single-movie"}>
             <div style={imageStyle} className="single-movie-image"></div>
             <div className={"single-movie-text"}>
-                <h3>{movie.original_title.length > 15 ? movie.original_title.substring(0,15)+'...' : movie.original_title}</h3>
-                <p>{movie.release_date.substring(0,4)}</p>
+                {/* <h3>{movie.original_title.length > 15 ? movie.original_title.substring(0,15)+'...' : movie.original_title}</h3> */}
+                {/* <p>{movie.release_date.substring(0,4)}</p> */}
             </div>
         </div>
     )
