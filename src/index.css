@@ -1,0 +1,45 @@
+.single-movie {
+    flex-basis: 20%;
+    height: 350px;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.single-movie .single-movie-image {
+    margin: 0 auto;
+    height: 90%;
+    width: 85%;
+    border: 3px solid #000;
+    border-radius: 20px;
+}
+
+.single-movie .single-movie-text {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.single-movie .single-movie-text h3 {
+    /* font-size: 20px; */
+    font-size: 20px;
+    font-weight: lighter;
+    margin: 0;
+}
+.single-movie .single-movie-text p {
+    font-size: 14px;
+    margin: 5px 0 0;
+}
+
+/* for low-res laptops */
+@media (max-width: 1200px) {
+
+}
+
+/* for small laptops and tablets */
+@media (max-width: 768px) {
+    
+}
+
+/* for phones */
+@media (max-width: 400px) {
+
+}

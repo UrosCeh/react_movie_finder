@@ -4,7 +4,8 @@ import Movie from './Movie'
 const Movies = ({ movies }) => {
     const moviesStyle = {
         display: "flex",
-        width: "80vw",
+        // width: "85%",
+        maxWidth: "1200px",
         // justifyContent: "center",
         // minHeight: "300vh",
         margin: "0 auto",

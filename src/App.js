@@ -42,7 +42,7 @@ function App() {
 
     // console.log(data)
 
-    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=lock`)
+    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=reservoir`)
     const data = await res.json()
 
     console.log( data.results, data.total_results)
