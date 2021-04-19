@@ -41,8 +41,8 @@ function App() {
     // const data = await res.json()
 
     // console.log(data)
-
-    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=locked`)
+    const query = 'berlin'
+    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}`)
     const data = await res.json()
 
     const pageNumber = data.total_pages
@@ -50,7 +50,7 @@ function App() {
     let allMovies = []
 
     for (let page = 1; page <= pageNumber; page++) {
-      let resPage = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=locked&page=${page}`)
+      let resPage = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}&page=${page}`)
       let dataPage = await resPage.json()
 
       // console.log( page, dataPage.results )
@@ -71,10 +71,20 @@ function App() {
 
   const setFetchedMovies = async() => {
     const fetchedMovies = await fetchMovie()
+    const languages = ['en', 'sr', 'fr', 'es', 'ca', 'it', 'de']
+    let filteredMovies = []
 
-    console.log(fetchedMovies)
+    // console.log(fetchedMovies)
 
-    setMovies(fetchedMovies)
+    fetchedMovies.forEach((movie) => {
+      if (movie.release_date != null && movie.poster_path != null && movie.popularity > 2 && movie.overview !== '' && languages.includes(movie.original_language)){
+        filteredMovies.push(movie)
+      }
+    })
+
+    console.log(filteredMovies)
+
+    setMovies(filteredMovies)
 
   }
 
