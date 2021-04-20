@@ -1,115 +1,97 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from "react"
+import "./App.css"
 import Button from "./components/Button"
-import Movies from './components/Movies';
-import SearchComponent from './components/SearchComponent';
+import Movies from "./components/Movies"
+import SearchComponent from "./components/SearchComponent"
 
 function App() {
+	const [movies, setMovies] = useState([])
 
-  const [movies, setMovies] = useState([])
+	const [query, setQuery] = useState("pearl")
+	// const recommendedMovies = [100, 101, 500, 550]
 
-  const [showSearch, setShowSearch] = useState(false)
-  // const recommendedMovies = [100, 101, 500, 550]
+	useEffect(() => {})
 
-  useEffect(() => {
+	const fetchMovie = async () => {
+		// const query = 'berlin'
+		const res = await fetch(
+			`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}`
+		)
+		const data = await res.json()
 
+		const pageNumber = data.total_pages
 
-  })
+		let allMovies = []
 
-  // const fetchAllMovies = async() => {
-  //   recommendedMovies.forEach((movie) => {
-  //     // console.log("running" + movie)
-  //     const data = fetchMovie(movie)
+		for (let page = 1; page <= pageNumber; page++) {
+			let resPage = await fetch(
+				`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}&page=${page}`
+			)
+			let dataPage = await resPage.json()
 
-  //     setMovies([...movies, data])
-  //   })
-    
-  // }
+			// console.log( page, dataPage.results )
 
-  const fetchMovie = async() => {
-    // fetch(`https://api.themoviedb.org/3/movie/2121212121?api_key=379499551351838f483ae37443d12e74`)
-    //   .then((res) => {
-    //     if (!res.ok) {
-    //       console.log("error")
-    //       return
-    //     }
-    //     res.json()
-    //   })
-    //   .then((data) => {
-    //     console.log("data: " + data)
-    //   })
-    // const data = await res.json()
+			// allMovies.concat(dataPage.results)
 
-    // console.log(data)
-    const query = 'berlin'
-    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}`)
-    const data = await res.json()
+			// allMovies = dataPage.results
 
-    const pageNumber = data.total_pages
+			dataPage.results.forEach((result) => {
+				allMovies.push(result)
+			})
+			// console.log(allMovies) radi
+		}
+		// console.log(allMovies) radi
+		return allMovies
+		// setMovies(allMovies)
+	}
 
-    let allMovies = []
+	const setFetchedMovies = async () => {
+		const fetchedMovies = await fetchMovie()
+		const languages = ["sr", "en", "fr", "es", "ca", "it", "de"]
+		let filteredMovies = []
 
-    for (let page = 1; page <= pageNumber; page++) {
-      let resPage = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}&page=${page}`)
-      let dataPage = await resPage.json()
+		console.log(fetchedMovies)
 
-      // console.log( page, dataPage.results )
-      
-      // allMovies.concat(dataPage.results)
+		fetchedMovies.forEach((movie) => {
+			if (
+				!movie.adult &&
+				movie.release_date != null &&
+				movie.poster_path != null &&
+				movie.popularity > 2 &&
+				movie.overview !== "" &&
+				languages.includes(movie.original_language)
+			) {
+				filteredMovies.push(movie)
+			}
+		})
 
-      // allMovies = dataPage.results
+		console.log(filteredMovies)
 
-      dataPage.results.forEach((result) => {
-        allMovies.push(result)
-      })
-      // console.log(allMovies) radi
-    }
-    // console.log(allMovies) radi
-    return allMovies
-    // setMovies(allMovies)
-  }
+		setMovies(filteredMovies)
+	}
 
-  const setFetchedMovies = async() => {
-    const fetchedMovies = await fetchMovie()
-    const languages = ['en', 'sr', 'fr', 'es', 'ca', 'it', 'de']
-    let filteredMovies = []
+	// const displayMovies = () => {
+	//   if (movies.length === 0) {
+	//     console.log("no")
+	//   }
+	//   movies.forEach((movie) => {
+	//     console.log(movie)
+	//   })
+	// }
 
-    // console.log(fetchedMovies)
+	// document.addEventListener("onload", fetchAllMovies)
+	// document.addEventListener("onload", displayMovies())
 
-    fetchedMovies.forEach((movie) => {
-      if (movie.release_date != null && movie.poster_path != null && movie.popularity > 2 && movie.overview !== '' && languages.includes(movie.original_language)){
-        filteredMovies.push(movie)
-      }
-    })
-
-    console.log(filteredMovies)
-
-    setMovies(filteredMovies)
-
-  }
-
-  // const displayMovies = () => {
-  //   if (movies.length === 0) {
-  //     console.log("no")
-  //   }
-  //   movies.forEach((movie) => {
-  //     console.log(movie)
-  //   })
-  // }
-
-  // document.addEventListener("onload", fetchAllMovies)
-  // document.addEventListener("onload", displayMovies())
-
-  return (
-    <div>
-      <Button text={'search'} onClick={() => setShowSearch(!showSearch)} />
-      {/* <Button text={'clg'} onClick={displayMovies} /> */}
-      <Button text={'fetch'} onClick={setFetchedMovies} />
-      { showSearch && <SearchComponent /> }
-      { movies.length > 0 ? <Movies movies={movies} /> : "No movies" }
-      {/* { movies.length > 0 ? "has movies" : "No movies" } */}
-    </div>
-  );
+	return (
+		<div>
+			{/* <Button text={'search'} onClick={() => setShowSearch(!showSearch)} /> */}
+			{/* <Button text={'clg'} onClick={displayMovies} /> */}
+			<Button text={"fetch"} onClick={setFetchedMovies} />
+			{<SearchComponent query={query} onButtonClick={setQuery} />}
+			{movies.length > 0 ? <Movies movies={movies} /> : "No movies"}
+			{/* { movies.length > 0 ? "has movies" : "No movies" } */}
+		</div>
+	)
 }
 
-export default App;
+export default App
