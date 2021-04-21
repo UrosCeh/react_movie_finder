@@ -6,7 +6,22 @@ import SearchComponent from "./components/SearchComponent"
 
 function App() {
 	const [movies, setMovies] = useState([])
+	const [genres, setGenres] = useState([])
 
+	// 	const res = await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=379499551351838f483ae37443d12e74")
+	// 	const data = await res.json()
+
+	// 	console.log(data)
+	// 	return data.genres
+	// })
+
+	const fetchGenres = async () => {
+		const res = await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=379499551351838f483ae37443d12e74")
+		const data = await res.json()
+
+		console.log(data)
+		setGenres(data.genres)
+	}
 	const [query, setQuery] = useState("pearl")
 	// const recommendedMovies = [100, 101, 500, 550]
 
@@ -14,9 +29,7 @@ function App() {
 
 	const fetchMovie = async () => {
 		// const query = 'berlin'
-		const res = await fetch(
-			`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}`
-		)
+		const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}`)
 		const data = await res.json()
 
 		const pageNumber = data.total_pages
@@ -85,9 +98,9 @@ function App() {
 	return (
 		<div>
 			{/* <Button text={'search'} onClick={() => setShowSearch(!showSearch)} /> */}
-			{/* <Button text={'clg'} onClick={displayMovies} /> */}
+			<Button text={"clg"} onClick={fetchGenres} />
+			{<SearchComponent query={query} onButtonClick={setQuery} genres={genres} />}
 			<Button text={"fetch"} onClick={setFetchedMovies} />
-			{<SearchComponent query={query} onButtonClick={setQuery} />}
 			{movies.length > 0 ? <Movies movies={movies} /> : "No movies"}
 			{/* { movies.length > 0 ? "has movies" : "No movies" } */}
 		</div>
