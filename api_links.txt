@@ -4,15 +4,19 @@ API docs - https://developers.themoviedb.org/3/authentication/how-do-i-generate-
 
 single movie - https://api.themoviedb.org/3/movie/550?api_key=379499551351838f483ae37443d12e74
 
-images - https://image.tmdb.org/t/p/<<width>>/<<link>>
+images- https://image.tmdb.org/t/p/original/<<width>>/<<link>>
 		https://image.tmdb.org/t/p/original/8kNruSfhk5IoE4eZOc4UpvDn6tq.jpg
 		https://image.tmdb.org/t/p/original/AjTtJNumZyUDz33VtMlF1K8JPsE.jpg
 
 	link in {movie}.poster_path
-videos - https://www.youtube.com/watch?v=<<link>>
+	videos - https://www.youtube.com/watch?v=<<link>>
 	link in movie/<<id>>/videos?api_key=<<>>[0].key
 	
 actors - https://api.themoviedb.org/3/movie/101/credits?api_key=379499551351838f483ae37443d12e74
+
+images - https://api.themoviedb.org/3/movie/101/images?api_key=379499551351838f483ae37443d12e74
+
+videos - https://api.themoviedb.org/3/movie/101/videos?api_key=379499551351838f483ae37443d12e74
 
 genres - https://api.themoviedb.org/3/genre/movie/list?api_key=379499551351838f483ae37443d12e74
 

@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import "./App.css"
 // import Button from "./components/Button"
 import Movies from "./components/Movies"
+import SingleMovieComponent from "./components/SingleMovieComponent"
 import SearchComponent from "./components/SearchComponent"
 
 function App() {
@@ -94,11 +96,20 @@ function App() {
 
 	return (
 		<div>
-			{/* <Button text={'search'} onClick={() => setShowSearch(!showSearch)} /> */}
-			{/* <Button text={"clg"} onClick={fetchGenres} /> */}
-			<SearchComponent setQuery={setQuery} setFetchedMovies={setFetchedMovies} genres={genres} />
-			{/* <Button text={"fetch"} onClick={setFetchedMovies} /> */}
-			{movies.length > 0 ? <Movies movies={movies} /> : "No movies"}
+			<Router>
+				{/* <Button text={'search'} onClick={() => setShowSearch(!showSearch)} /> */}
+				{/* <Button text={"clg"} onClick={fetchGenres} /> */}
+				{/* <Button text={"fetch"} onClick={setFetchedMovies} /> */}
+				<Switch>
+					<Route path="/" exact>
+						<SearchComponent setQuery={setQuery} setFetchedMovies={setFetchedMovies} genres={genres} />
+						{movies.length > 0 ? <Movies movies={movies} /> : "No movies"}
+					</Route>
+				</Switch>
+				<Switch>
+					<Route path={`/:id`} exact component={SingleMovieComponent} />
+				</Switch>
+			</Router>
 		</div>
 	)
 }
