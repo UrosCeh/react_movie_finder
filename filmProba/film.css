@@ -1,3 +1,63 @@
 body {
 	background-color: #333333;
 }
+
+.container {
+	display: block;
+	width: 100vw;
+	min-height: 100vh;
+	/* align-items: center; */
+}
+
+.component {
+	width: 1100px;
+	margin: 40px auto;
+}
+
+.movie {
+	display: flex;
+	width: 1000px;
+	/* flex-wrap: nowrap; */
+}
+
+.movie-image {
+	flex-basis: 30%;
+}
+
+.movie-image img {
+	width: 260px;
+	height: 400px;
+	/* background-repeat: no-repeat; */
+	/* background-size: 100% 100%; */
+}
+
+.movie-text {
+	flex-basis: 70%;
+}
+
+.video {
+	display: flex;
+	justify-content: center;
+}
+
+.video iframe {
+	width: 500px;
+}
+
+.images {
+	display: flex;
+}
+
+.images .img {
+	background-size: cover;
+	background-repeat: no-repeat;
+	flex: 1;
+	margin: 10px;
+	height: 300px;
+	transition: flex 0.5s ease-in;
+	cursor: pointer;
+}
+
+.images .img.active {
+	flex: 5;
+}
