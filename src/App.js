@@ -1,34 +1,31 @@
 import { useState, useEffect } from "react"
 import "./App.css"
-import Button from "./components/Button"
+// import Button from "./components/Button"
 import Movies from "./components/Movies"
 import SearchComponent from "./components/SearchComponent"
 
 function App() {
 	const [movies, setMovies] = useState([])
-	const [genres, setGenres] = useState([])
-
-	// 	const res = await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=379499551351838f483ae37443d12e74")
-	// 	const data = await res.json()
-
-	// 	console.log(data)
-	// 	return data.genres
-	// })
+	const [genres, setGenres] = useState([{ id: -1, name: "Select Genre" }])
+	const [query, setQuery] = useState("pearl")
 
 	const fetchGenres = async () => {
 		const res = await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=379499551351838f483ae37443d12e74")
 		const data = await res.json()
 
+		var genresArr = [{ id: -1, name: "Select Genre" }]
+		genresArr = genresArr.concat(data.genres)
+
 		console.log(data)
-		setGenres(data.genres)
+		setGenres(genresArr)
+		// return data.genres
 	}
-	const [query, setQuery] = useState("pearl")
-	// const recommendedMovies = [100, 101, 500, 550]
+
+	document.addEventListener("DOMContentLoaded", fetchGenres)
 
 	useEffect(() => {})
 
 	const fetchMovie = async () => {
-		// const query = 'berlin'
 		const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}`)
 		const data = await res.json()
 
@@ -98,11 +95,10 @@ function App() {
 	return (
 		<div>
 			{/* <Button text={'search'} onClick={() => setShowSearch(!showSearch)} /> */}
-			<Button text={"clg"} onClick={fetchGenres} />
-			{<SearchComponent query={query} onButtonClick={setQuery} genres={genres} />}
-			<Button text={"fetch"} onClick={setFetchedMovies} />
+			{/* <Button text={"clg"} onClick={fetchGenres} /> */}
+			<SearchComponent setQuery={setQuery} setFetchedMovies={setFetchedMovies} genres={genres} />
+			{/* <Button text={"fetch"} onClick={setFetchedMovies} /> */}
 			{movies.length > 0 ? <Movies movies={movies} /> : "No movies"}
-			{/* { movies.length > 0 ? "has movies" : "No movies" } */}
 		</div>
 	)
 }
