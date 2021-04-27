@@ -11,13 +11,38 @@ const SingleMovieComponent = ({ match }) => {
 		const data = await res.json()
 
 		setMovie(data)
+		// console.log(data.genres)
+		data.genres.forEach((g) => {
+			console.log(g)
+		})
+	}
+
+	const [genres, setGenres] = useState("")
+
+	const getGenres = () => {
+		console.log(movie.genres)
+		let genresTemp = ""
+		movie.genres.forEach((genre) => {
+			genresTemp += genre.name + "/"
+		})
+
+		setGenres(genresTemp)
 	}
 
 	document.addEventListener("DOMContentLoaded", fetchMovie)
+	// document.addEventListener("DOMContentLoaded", getGenres)
 
 	return (
-		<div>
-			<h1></h1>
+		<div className={"container"}>
+			<div className="movie component">
+				<div className="movie-poster"></div>
+
+				<div className="movie-text">
+					<h1>{movie.original_title}</h1>
+					<h4>{movie.release_date}</h4>
+					<h4>{genres}</h4>
+				</div>
+			</div>
 		</div>
 	)
 }

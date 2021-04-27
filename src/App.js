@@ -59,7 +59,8 @@ function App() {
 
 	const setFetchedMovies = async () => {
 		const fetchedMovies = await fetchMovie()
-		const languages = ["sr", "en", "fr", "es", "ca", "it", "de"]
+		// const languages = ["sr", "en", "fr", "es", "ca", "it", "de"]
+		const languages = ["en"]
 		let filteredMovies = []
 
 		console.log(fetchedMovies)
