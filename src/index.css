@@ -1,6 +1,7 @@
 body {
 	/* background-color: #333333; */
 	background-color: #110306;
+	overflow-x: hidden;
 }
 
 .search {
@@ -98,4 +99,117 @@ body {
 
 /* for phones */
 @media (max-width: 400px) {
+}
+
+/* SINGLE MOVIE */
+
+.container {
+	/* display: block; */
+	/* width: 100vw; */
+	min-height: 100vh;
+	/* align-items: center; */
+}
+
+.background-image {
+	position: absolute;
+	top: 0;
+	z-index: -1;
+	/* margin: 0 auto; */
+	width: 100vw;
+	/* height: 85vh; */
+	background-image: url("https://image.tmdb.org/t/p/original/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	filter: blur(20px);
+}
+
+.component {
+	width: 1000px;
+	margin: 40px auto;
+	display: flex;
+}
+
+#movie {
+	display: flex;
+}
+
+.movie-image {
+	flex-basis: 30%;
+	margin: 10px;
+}
+
+.movie-image img {
+	width: 260px;
+	height: 400px;
+	border: #fff solid 4px;
+	border-radius: 5px;
+	/* background-repeat: no-repeat; */
+	/* background-size: 100% 100%; */
+}
+
+.movie-text {
+	flex-basis: 70%;
+	margin: 10px;
+}
+
+.movie-text .rating {
+	display: flex;
+}
+
+.movie-text .rating h4 {
+	margin: 16px 10px;
+}
+
+#video {
+	flex: 6;
+}
+
+#images .img {
+	background-size: cover;
+	background-repeat: no-repeat;
+	flex: 1;
+	margin: 10px;
+	height: 300px;
+	transition: flex 0.5s ease-in;
+	cursor: pointer;
+	border: #fff solid 2px;
+}
+
+#images .img.active {
+	flex: 5;
+}
+
+#cast {
+	flex: 4;
+}
+
+#actors {
+	height: 300px;
+	overflow: auto;
+	background-color: black;
+}
+
+.actor {
+	display: flex;
+	align-items: center;
+}
+
+.actor .actor-image {
+	flex: 1;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: 10px;
+	height: 100px;
+	width: 70px;
+	border: #fff solid 2px;
+	border-radius: 10px;
+}
+
+.actor .actor-text {
+	color: white;
+	flex: 4;
+}
+
+.actor .actor-text span {
+	color: gray;
 }

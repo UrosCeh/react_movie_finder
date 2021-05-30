@@ -5,6 +5,11 @@ import "./App.css"
 import Movies from "./components/Movies"
 import SingleMovieComponent from "./components/SingleMovieComponent"
 import SearchComponent from "./components/SearchComponent"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { faHeart, faUsers, faSearch } from "@fortawesome/free-solid-svg-icons"
+
+library.add(faHeart, faUsers, faSearch)
 
 function App() {
 	const [movies, setMovies] = useState([])
@@ -18,7 +23,6 @@ function App() {
 		var genresArr = [{ id: -1, name: "Select Genre" }]
 		genresArr = genresArr.concat(data.genres)
 
-		console.log(data)
 		setGenres(genresArr)
 		// return data.genres
 	}
@@ -108,7 +112,9 @@ function App() {
 					</Route>
 				</Switch>
 				<Switch>
-					<Route path={`/:id`} exact component={SingleMovieComponent} />
+					<Route path={`/:id`} exact component={SingleMovieComponent}>
+						{/* <SearchComponent setQuery={setQuery} setFetchedMovies={setFetchedMovies} genres={genres} /> */}
+					</Route>
 				</Switch>
 			</Router>
 		</div>

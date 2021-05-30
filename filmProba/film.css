@@ -5,7 +5,7 @@ body {
 
 .container {
 	/* display: block; */
-	width: 100vw;
+	/* width: 100vw; */
 	min-height: 100vh;
 	/* align-items: center; */
 }
@@ -26,11 +26,10 @@ body {
 .component {
 	width: 1000px;
 	margin: 40px auto;
+	display: flex;
 }
 
 .movie {
-	display: flex;
-	width: 1000px;
 	color: #fff;
 }
 
@@ -62,16 +61,8 @@ body {
 }
 
 .video {
-	display: flex;
-	justify-content: center;
-}
-
-.video iframe {
-	width: 500px;
-}
-
-.images {
-	display: flex;
+	flex: 6;
+	/* justify-content: center; */
 }
 
 .images .img {
@@ -87,4 +78,39 @@ body {
 
 .images .img.active {
 	flex: 5;
+}
+
+.cast {
+	flex: 4;
+}
+
+.cast-members {
+	height: 300px;
+	overflow: auto;
+	background-color: black;
+}
+
+.member {
+	display: flex;
+	align-items: center;
+}
+
+.member .member-image {
+	flex: 1;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: 10px;
+	height: 100px;
+	width: 70px;
+	border: #fff solid 2px;
+	border-radius: 10px;
+}
+
+.member .member-name {
+	color: white;
+	flex: 4;
+}
+
+.member .member-name span {
+	color: gray;
 }
