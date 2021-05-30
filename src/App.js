@@ -33,19 +33,20 @@ function App() {
 				genresArr = genresArr.concat(data.genres)
 				setGenres(genresArr)
 			})
+		console.log(query)
 	}, [])
 
 	useEffect(() => {
-		fetch("https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=379499551351838f483ae37443d12e74")
-			.then((res) => res.json())
-			.then((data) => setMovies(data.results))
-	}, [])
-
-	// useEffect(() => {
-	// 	fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}&page=${page}`)
-	// 		.then((res) => res.json())
-	// 		.then((data) => setFetchedMovies(data))
-	// }, [query])
+		if (query === undefined || query === "") {
+			fetch("https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=379499551351838f483ae37443d12e74")
+				.then((res) => res.json())
+				.then((data) => setMovies(data.results))
+		} else {
+			fetch(`https://api.themoviedb.org/3/search/movie?api_key=379499551351838f483ae37443d12e74&query=${query}&page=${page}`)
+				.then((res) => res.json())
+				.then((data) => setFetchedMovies(data))
+		}
+	}, [query])
 
 	const setFetchedMovies = async (data) => {
 		const pageNumber = data.total_pages
@@ -90,16 +91,16 @@ function App() {
 
 	return (
 		<div>
+			<SearchComponent setQuery={setQuery} genres={genres} languages={languages} />
+
 			<Router>
 				<Switch>
 					<Route path="/" exact>
-						<SearchComponent setQuery={setQuery} genres={genres} languages={languages} />
 						{movies.length > 0 ? <Movies movies={movies} /> : "No movies"}
 					</Route>
 				</Switch>
 				<Switch>
 					<Route path={`/:id`} exact>
-						<SearchComponent setQuery={setQuery} genres={genres} languages={languages} />
 						<SingleMovieComponent />
 					</Route>
 				</Switch>
