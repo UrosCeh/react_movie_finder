@@ -1,10 +1,10 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart } from "@fortawesome/free-solid-svg-icons"
+import { useParams } from "react-router"
 
-const SingleMovieComponent = ({ match }) => {
-	const id = match.params.id
+const SingleMovieComponent = () => {
+	const id = useParams().id
 	const [movie, setMovie] = useState({})
 	const [video, setVideo] = useState()
 
@@ -54,7 +54,7 @@ const SingleMovieComponent = ({ match }) => {
 			images.forEach((image, idx) => {
 				const imageDiv = document.createElement("div")
 				imageDiv.style = `background-image: url('https://image.tmdb.org/t/p/original${image.file_path}')`
-				idx == 0 ? imageDiv.classList.add("img", "active") : imageDiv.classList.add("img")
+				idx === 0 ? imageDiv.classList.add("img", "active") : imageDiv.classList.add("img")
 				imageDiv.addEventListener("click", () => {
 					removeAllActives()
 					imageDiv.classList.add("active")

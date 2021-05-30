@@ -5,19 +5,17 @@ body {
 }
 
 .search {
+	width: 100%;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
-	flex-wrap: wrap;
+	align-items: center;
 	background-color: #000;
-	padding: 30px 0 50px;
-}
-
-.search-group {
-	max-width: 1000px;
+	padding: 30px 0 30px;
 }
 
 .search-input {
-	max-width: 1000px;
+	width: 400px;
 	color: #fff;
 	font-size: large;
 	background-color: #333333;
@@ -28,6 +26,8 @@ body {
 }
 
 .search-field {
+	width: 200px;
+	margin: 20px 5px 0;
 	font-size: large;
 	border: 1px #fff solid;
 	border-radius: 5px;
@@ -38,7 +38,8 @@ body {
 }
 
 .search button {
-	width: 200px;
+	margin-top: 20px;
+	width: 100px;
 	padding: 10px;
 	background-color: maroon;
 	color: #fff;
@@ -62,6 +63,7 @@ body {
 	height: 350px;
 	position: relative;
 	margin-bottom: 40px;
+	overflow: hidden;
 }
 
 .single-movie .single-movie-image {
@@ -70,19 +72,88 @@ body {
 	width: 80%;
 	border: 5px solid #fff;
 	border-radius: 20px;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.single-movie .single-movie-overview {
+	visibility: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.single-movie .single-movie-overview-cover {
+	height: 85%;
+	width: 80%;
+	background-color: black;
+	opacity: 0.8;
+	border-radius: 20px;
+	border: 5px solid rgb(40, 40, 133);
+	margin: 0 auto;
+}
+
+.single-movie .single-movie-overview button {
+	position: absolute;
+	top: 5%;
+	left: 50%;
+	transform: translateX(-50%);
+	color: wheat;
+	background-color: rgb(40, 40, 133);
+	border: 0;
+	border-radius: 10px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.single-movie .single-movie-overview h5 {
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 20px;
+	color: wheat;
+}
+
+.single-movie .single-movie-overview p {
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 25px;
+	color: wheat;
+}
+
+.single-movie .single-movie-overview h4 {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 18px;
+	color: wheat;
+	text-align: center;
+}
+
+.single-movie:hover .single-movie-overview {
+	/* background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)); */
+	visibility: visible;
 }
 
 .single-movie .single-movie-text {
 	color: #fff;
 	width: 85%;
-	margin: 0 auto;
+	margin: 5px 0 0 20px;
 }
 
 .single-movie .single-movie-text h3 {
-	/* font-size: 20px; */
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: lighter;
 	margin: 0;
+	cursor: pointer;
 }
 .single-movie .single-movie-text p {
 	font-size: 14px;
@@ -124,6 +195,7 @@ body {
 }
 
 .component {
+	color: white;
 	width: 1000px;
 	margin: 40px auto;
 	display: flex;

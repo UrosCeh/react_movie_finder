@@ -1,7 +1,7 @@
 import React from "react"
 
-const OptionComponent = ({ genre }) => {
-	return <option value={genre.id}>{genre.name}</option>
+const OptionComponent = ({ value }) => {
+	return <option value={value.id}>{value.name}</option>
 }
 
 export default OptionComponent
