@@ -332,6 +332,10 @@ body {
 	cursor: pointer;
 }
 
+.pagination button:disabled {
+	cursor: not-allowed;
+}
+
 .pagination button:hover {
 	background-color: var(--secondary);
 	color: white;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import Button from "./Button"
 import OptionComponent from "./OptionComponent"
 
 const SearchComponent = () => {
@@ -25,9 +24,24 @@ const SearchComponent = () => {
 			})
 	}, [])
 
+	// document.getElementById("search-form").addEventListener("submit", (e) => {
+	// 	// e.path.document.location.pathname = "/"
+	// 	e.preventDefault()
+	// 	console.log(e.path.document.location)
+	// })
+
+	const searchMovies = (e) => {
+		e.preventDefault()
+		const genre = e.target.genre.value
+		const language = e.target.language.value
+		const keyword = e.target.keyword.value
+		window.location.search = `?keyword=${keyword}&genre=${genre}&language=${language}`
+		window.location.pathname = ""
+	}
+
 	return (
-		<form className="search">
-			<input className="search-input" placeholder="movie name..." type="text" name="keyword" id="keyword" autoComplete="off" />
+		<form id="search-form" className="search" onSubmit={(e) => searchMovies(e)}>
+			<input className="search-input" placeholder="Movie title..." type="text" name="keyword" id="keyword" autoComplete="off" />
 
 			<div className="search-group-select">
 				<select className="search-field" name="genre" id="genre">

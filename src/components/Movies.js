@@ -91,7 +91,9 @@ const Movies = () => {
 
 			{!lastPage && ( //daj promenljivu nesto kao imaJosStranica...
 				<div className="pagination">
-					<button onClick={() => setPage(page + 1)}>Show More</button>
+					<button onClick={() => setPage(page + 1)} disabled={!done}>
+						Show More
+					</button>
 				</div>
 			)}
 		</div>
