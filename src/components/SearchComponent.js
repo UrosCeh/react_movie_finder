@@ -1,24 +1,33 @@
-import React, { useState, useCallback } from "react"
+import React, { useEffect, useState } from "react"
 import Button from "./Button"
 import OptionComponent from "./OptionComponent"
 
-const SearchComponent = ({ setQuery, genres, languages }) => {
-	// const [keyword, setKeyword] = useState("")
+const SearchComponent = () => {
+	const [genres, setGenres] = useState([])
+	const [languages, setLanguages] = useState([
+		{ id: "", name: "All Languages" },
+		{ id: "en", name: "English" },
+		{ id: "fr", name: "French" },
+		{ id: "de", name: "German" },
+		{ id: "es", name: "Spanish" },
+		{ id: "it", name: "Italian" },
+		{ id: "ru", name: "Russian" },
+		{ id: "ja", name: "Japanese" }
+	])
 
-	// const handleInputChange = useCallback((event) => {
-	// 	setKeyword(event.target.value)
-	// }, [])
+	useEffect(() => {
+		fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=379499551351838f483ae37443d12e74")
+			.then((res) => res.json())
+			.then((data) => {
+				let genresArr = [{ id: -1, name: "Select Genre" }]
+				genresArr = genresArr.concat(data.genres)
+				setGenres(genresArr)
+			})
+	}, [])
 
-	const changeQuery = () => {
-		let keyword = document.getElementById("movie_keyword").value
-		// window.location.pathname = "/"
-		setQuery(keyword)
-	}
-
-	// console.log(keyword)
 	return (
-		<div className="search">
-			<input className="search-input" placeholder="movie name..." type="text" name="movie_keyword" id="movie_keyword" autoComplete="off" />
+		<form className="search">
+			<input className="search-input" placeholder="movie name..." type="text" name="keyword" id="keyword" autoComplete="off" />
 
 			<div className="search-group-select">
 				<select className="search-field" name="genre" id="genre">
@@ -32,8 +41,8 @@ const SearchComponent = ({ setQuery, genres, languages }) => {
 					))}
 				</select>
 			</div>
-			<Button text={"Search"} onClick={changeQuery} />
-		</div>
+			<button type="submit">Search</button>
+		</form>
 	)
 }
 

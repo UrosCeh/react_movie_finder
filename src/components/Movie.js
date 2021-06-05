@@ -10,19 +10,21 @@ const Movie = ({ movie }) => {
 	const imageStyle = {
 		backgroundImage: `url(${backImagePath})`,
 		backgroundRepeat: "no-repeat",
-		backgroundSize: "100% 100%"
+		backgroundSize: "cover"
 	}
 
 	const openMoviePage = () => {
-		window.location.pathname = `/${movie.id}`
+		window.location.search = ""
+		window.location.pathname = `/movie/${movie.id}`
 	}
 
 	return (
 		<div className={"single-movie"}>
 			<div className="single-movie-image" style={imageStyle}></div>
 			<div className={"single-movie-text"}>
-				<h3>{movie.title.length > 28 ? movie.title.substring(0, 26) + "..." : movie.original_title}</h3>
-				<p>{movie.release_date.substring(0, 4)}</p>
+				{/* <h3>{movie.title.length > 28 ? movie.title.substring(0, 26) + "..." : movie.original_title}</h3> */}
+				<h3>{movie.title}</h3>
+				<p>{movie.release_date ? movie.release_date.substring(0, 4) : "Unknown"}</p>
 			</div>
 			<div className="single-movie-overview">
 				<div className="single-movie-overview-cover"></div>

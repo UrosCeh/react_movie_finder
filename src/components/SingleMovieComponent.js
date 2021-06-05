@@ -17,7 +17,7 @@ const SingleMovieComponent = () => {
 	useEffect(() => {
 		fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=379499551351838f483ae37443d12e74`)
 			.then((res) => res.json())
-			.then((data) => setVideo(`https://www.youtube.com/embed/${data.results[0].key}`))
+			.then((data) => setVideo(`https://www.youtube.com/embed/${data.results.length > 0 ? data.results[0].key : "XMXEnMfDlzs"}`))
 	}, [])
 
 	useEffect(() => {
@@ -51,6 +51,7 @@ const SingleMovieComponent = () => {
 	const setImagesComponent = (images) => {
 		if (images instanceof Array) {
 			const imagesComponent = document.getElementById("images")
+			imagesComponent.innerHTML = ""
 			images.forEach((image, idx) => {
 				const imageDiv = document.createElement("div")
 				imageDiv.style = `background-image: url('https://image.tmdb.org/t/p/original${image.file_path}')`
@@ -62,8 +63,6 @@ const SingleMovieComponent = () => {
 
 				imagesComponent.appendChild(imageDiv)
 			})
-		} else {
-			//ispisi da ne mogu da se nadju slike...
 		}
 	}
 
@@ -74,12 +73,6 @@ const SingleMovieComponent = () => {
 			img.classList.remove("active")
 		})
 	}
-
-	// const setVideo = (data) => {
-	// 	const video = `https://www.youtube.com/watch?v=${data.key}`
-	// 	console.log(video)
-	// 	movie.video = video
-	// }
 
 	const setCastComopnent = (cast) => {
 		if (cast instanceof Array) {
@@ -154,10 +147,10 @@ const SingleMovieComponent = () => {
 
 			<div className="component" id="images"></div>
 
-			<div className="component">
+			<div className="component video-cast">
 				<div id="video">
 					<h4>Movie Trailer</h4>
-					<iframe src={video} height="300" width="500"></iframe>
+					<iframe src={video} title={id}></iframe>
 				</div>
 				<div id="cast">
 					<h4>Movie Cast</h4>
