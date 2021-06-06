@@ -7,12 +7,8 @@
 }
 
 body {
-	/* background-color: #333333; */
-	/* background-color: #110306; */
 	background-color: var(--primary);
 	overflow-x: hidden;
-	/* margin: 0; */
-	/* font-family: "Roboto", sans-serif; */
 }
 
 .search {
@@ -51,7 +47,6 @@ body {
 	min-width: 130px;
 	margin: 20px 5px 0;
 	font-size: 16px;
-	/* border: 1px #fff solid; */
 	border-radius: 50px;
 	background-color: var(--primary);
 	padding: 5px 10px;
@@ -176,7 +171,6 @@ body {
 }
 
 .single-movie:hover .single-movie-overview {
-	/* background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)); */
 	visibility: visible;
 }
 
@@ -205,9 +199,7 @@ body {
 	position: absolute;
 	top: 0;
 	z-index: -1;
-	/* margin: 0 auto; */
 	width: 100vw;
-	/* height: 85vh; */
 	background-image: url("https://image.tmdb.org/t/p/original/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -235,8 +227,6 @@ body {
 	height: 400px;
 	border: #fff solid 4px;
 	border-radius: 5px;
-	/* background-repeat: no-repeat; */
-	/* background-size: 100% 100%; */
 }
 
 .movie-text {
@@ -402,8 +392,4 @@ body {
 	#images .img {
 		height: 100px;
 	}
-
-	/* #images .img:nth-child(n + 3) {
-		display: none;
-	} */
 }

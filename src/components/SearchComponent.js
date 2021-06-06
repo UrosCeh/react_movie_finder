@@ -24,12 +24,6 @@ const SearchComponent = () => {
 			})
 	}, [])
 
-	// document.getElementById("search-form").addEventListener("submit", (e) => {
-	// 	// e.path.document.location.pathname = "/"
-	// 	e.preventDefault()
-	// 	console.log(e.path.document.location)
-	// })
-
 	const searchMovies = (e) => {
 		e.preventDefault()
 		const genre = e.target.genre.value

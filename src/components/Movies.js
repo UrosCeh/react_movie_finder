@@ -89,7 +89,7 @@ const Movies = () => {
 				{!done && <ReactLoading className="done" type={"spin"} color={"#fff"} height={"250px"} width={"250px"} />}
 			</div>
 
-			{!lastPage && ( //daj promenljivu nesto kao imaJosStranica...
+			{!lastPage && (
 				<div className="pagination">
 					<button onClick={() => setPage(page + 1)} disabled={!done}>
 						Show More
