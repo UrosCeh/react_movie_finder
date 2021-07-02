@@ -1,21 +1,16 @@
 import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Link } from "react-router-dom"
 
 const Movie = ({ movie }) => {
-	let backImagePath =
-		movie.poster_path !== null
-			? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
-			: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"
+	let backImagePath = movie.poster_path
+		? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+		: "http://www.newdesignfile.com/postpic/2015/02/no-icon-available_68024.png"
 
 	const imageStyle = {
 		backgroundImage: `url(${backImagePath})`,
 		backgroundRepeat: "no-repeat",
-		backgroundSize: "cover"
-	}
-
-	const openMoviePage = () => {
-		window.location.search = ""
-		window.location.pathname = `/movie/${movie.id}`
+		backgroundSize: movie.poster_path ? "cover" : "100% 100%"
 	}
 
 	return (
@@ -27,7 +22,8 @@ const Movie = ({ movie }) => {
 			</div>
 			<div className="single-movie-overview">
 				<div className="single-movie-overview-cover"></div>
-				<button onClick={openMoviePage}>View Details</button>
+				<Link to={`/movie/${movie.id}`}>View Details</Link>
+				{/* <Link onClick={openMoviePage}>View Details</Link> */}
 				<h5>
 					<FontAwesomeIcon className="fas" icon={["fas", "star"]}></FontAwesomeIcon>
 				</h5>

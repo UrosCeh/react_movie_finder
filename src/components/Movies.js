@@ -5,21 +5,20 @@ import ReactLoading from "react-loading"
 const Movies = () => {
 	const query = () => {
 		const q = window.location.search
-		// q === "" ? console.log("prazan") : console.log("ima nesto")
 		if (q === "")
 			return {
-				keyword: "",
+				keywords: "",
 				genre: "",
 				language: ""
 			}
-		let k = q.split("?keyword=")
+		let k = q.split("?keywords=")
 		k = k[1].split("&genre=")
 		let key = k[0]
 		let g = k[1].split("&language=")
 		let gen = g[0] === "-1" ? "" : g[0]
 		let lan = g[1]
 		return {
-			keyword: key,
+			keywords: key,
 			genre: gen,
 			language: lan
 		}
@@ -29,7 +28,7 @@ const Movies = () => {
 	const [page, setPage] = useState(1)
 	const [done, setDone] = useState(false)
 	const [lastPage, setLastPage] = useState(false)
-	const keyword = query().keyword
+	const keywords = query().keywords
 	const genre = query().genre
 	const language = query().language
 
@@ -38,7 +37,7 @@ const Movies = () => {
 
 	useEffect(() => {
 		fetch(
-			`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_genres=${genre}&with_original_language=${language}&api_key=379499551351838f483ae37443d12e74`
+			`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_genres=${genre}&with_original_language=${language}&with_keywords=${keywords}&api_key=379499551351838f483ae37443d12e74`
 		)
 			.then((res) => res.json())
 			.then((data) => getMovies(data.total_pages))
@@ -50,24 +49,20 @@ const Movies = () => {
 
 		for (let p = mp; p <= totalPages; p++) {
 			const res = await fetch(
-				`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_genres=${genre}&with_original_language=${language}&page=${p}&api_key=379499551351838f483ae37443d12e74`
+				`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_genres=${genre}&with_original_language=${language}&with_keywords=${keywords}&page=${p}&api_key=379499551351838f483ae37443d12e74`
 			)
 			const data = await res.json()
-
 			for (let i = mi; i < data.results.length; i++) {
 				let movie = data.results[i]
-				if (movie.title.toLowerCase().includes(keyword) || movie.original_title.toLowerCase().includes(keyword)) {
-					if (!append) {
-						setMovies([movie])
-						added++
-						append = true
-					} else {
-						setMovies((prevMovies) => [...prevMovies, movie])
-						added++
-					}
+				if (!append) {
+					setMovies([movie])
+					added++
+					append = true
+				} else {
+					setMovies((prevMovies) => [...prevMovies, movie])
+					added++
 				}
 				if (added >= 20) {
-					console.log("veca je")
 					setDone(true)
 					setMi(i === data.results.length - 1 ? 0 : i + 1)
 					setMp(i === data.results.length - 1 ? p + 1 : p)

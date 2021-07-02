@@ -39,7 +39,9 @@ const SingleMovieComponent = () => {
 			genres: getGenres(data.genres),
 			release_year: data.release_date.substring(0, 4),
 			overview: data.overview,
-			poster: `https://image.tmdb.org/t/p/original/${data.poster_path}`,
+			poster: data.poster_path
+				? `https://image.tmdb.org/t/p/original/${data.poster_path}`
+				: "http://www.newdesignfile.com/postpic/2015/02/no-icon-available_68024.png",
 			vote_average: data.vote_average,
 			vote_count: data.vote_count,
 			runtime: data.runtime
@@ -75,12 +77,21 @@ const SingleMovieComponent = () => {
 	}
 
 	const setCastComopnent = (cast) => {
+		const actors = document.getElementById("actors")
+		if (cast.length === 0) {
+			const noActors = document.createElement("p")
+			noActors.style.padding = "10px"
+			noActors.innerText = "Sorry we couldn't find any actors for this movie"
+
+			actors.appendChild(noActors)
+		}
 		if (cast instanceof Array) {
-			const actors = document.getElementById("actors")
 			cast.forEach((member) => {
 				const actorImage = document.createElement("img")
 				actorImage.classList.add("actor-image")
-				actorImage.src = `https://image.tmdb.org/t/p/original${member.profile_path}`
+				actorImage.src = member.profile_path
+					? `https://image.tmdb.org/t/p/original${member.profile_path}`
+					: "https://www.diabetes.ie/wp-content/uploads/2017/02/no-image-available.png"
 
 				const actorName = document.createElement("span")
 				actorName.innerText = `${member.name} as`
